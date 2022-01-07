@@ -3,6 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Codes/GitCat/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3333333333333333" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/drawable/ic_add.xml" value="0.37864583333333335" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.3333333333333333" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3333333333333333" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/drawable/item_count_layout.xml" value="0.3333333333333333" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/drawable/item_slot_bg.xml" value="0.3333333333333333" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/layout/activity_game.xml" value="0.33" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/layout/activity_home.xml" value="0.29074074074074074" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/layout/activity_main.xml" value="0.29074074074074074" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/layout/activity_repository.xml" value="0.29074074074074074" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/layout/activity_shop.xml" value="0.29074074074074074" />
+        <entry key="..\:/Codes/GitCat/app/src/main/res/layout/repository_list_item.xml" value="0.29074074074074074" />
         <entry key="app/src/main/res/drawable/ic_baseline_shopping_bag_24.xml" value="0.18425925925925926" />
         <entry key="app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.18425925925925926" />
         <entry key="app/src/main/res/drawable/item_count_layout.xml" value="0.1" />
@@ -19,5 +31,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33" />
+      </ProjectState>
+    </option>
   </component>
 </project>
