@@ -2,6 +2,7 @@ package com.example.gitcat
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -33,9 +34,30 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
 
     init {
         firestore.collection("users").document(uid).addSnapshotListener { value, error ->
-            _credits.value = value?.data?.get(CREDITS).toString().split(".")[0].toInt()
-            _pats.value = value?.data?.get(PATS).toString().split(".")[0].toInt()
-            _food.value = value?.data?.get(FOOD).toString().split(".")[0].toInt()
+            if (error?.message != null)   {
+                Log.d("hello","error ${error.message}")
+            }
+            val values = value?.data
+            if (values?.get(CREDITS) == null) {
+                _credits.value = 0
+            }
+            if (values?.get(PATS) == null) {
+                _pats.value = 0
+            }
+            if (values?.get(FOOD) == null) {
+                _food.value = 0
+            }
+            values?.get(CREDITS)?.let { cred ->
+                _credits.value =cred.toString().split(".")[0].toInt()
+            }
+            values?.get(PATS)?.let { pat ->
+                _pats.value = pat.toString().split(".")[0].toInt()
+            }
+            values?.get(FOOD)?.let { food ->
+                _food.value = food.toString().split(".")[0].toInt()
+            }
+
+
         }
     }
     fun decreaseField(field: String,quantity: Int) {
