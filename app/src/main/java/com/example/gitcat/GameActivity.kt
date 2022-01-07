@@ -43,6 +43,12 @@ class GameActivity : AppCompatActivity() {
                 Snackbar.make(binding.root, "GitCat's health is full. It fills you with a sense of accomplishment!", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            viewModel.health.observe(this) {
+                val current = it * incrementValue
+                val layoutParams = binding.healthBarFill.layoutParams
+                layoutParams.width = current.toInt()
+                binding.healthBarFill.layoutParams = layoutParams
+            }
             decrementCount(FOOD, 1)
             increaseHealth()
             playHappyFedCat() }
@@ -84,13 +90,17 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun increaseHealth() {
-        val layoutParams = binding.healthBarFill.layoutParams
-        var width = layoutParams.width + incrementValue.toInt()
-        if (width > binding.healthBarNoFill.width) {
-            width = binding.healthBarNoFill.width
+        if (viewModel.health.value == 5f) {
+            Snackbar.make(binding.root, "GitCat's health is full. It fills you with a sense of accomplishment!", Snackbar.LENGTH_SHORT).show()
         }
-        layoutParams.width = width
-        binding.healthBarFill.layoutParams = layoutParams
+        viewModel.increaseField(HEALTH, 1)
+//        val layoutParams = binding.healthBarFill.layoutParams
+//        var width = layoutParams.width + incrementValue.toInt()
+//        if (width > binding.healthBarNoFill.width) {
+//            width = binding.healthBarNoFill.width
+//        }
+//        layoutParams.width = width
+//        binding.healthBarFill.layoutParams = layoutParams
     }
 
     private fun startSittingAnimation() {

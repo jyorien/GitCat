@@ -42,12 +42,12 @@ class HomeActivity : AppCompatActivity() {
                         startActivity(it)
                     }
                 } else {
-                    Log.w("hello", response.body().toString())
+                    Log.w("hello", "response body ${response.body().toString()}")
                 }
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.e("hello", t.message ?: "")
+                Log.e("hello", t.message ?: "failure at HomeActivity")
             }
 
         })
