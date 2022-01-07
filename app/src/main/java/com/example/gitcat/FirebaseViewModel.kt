@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 const val CREDITS = "credits"
 const val PATS = "pats"
 const val FOOD = "food"
+const val HEALTH = "health"
 class FirebaseViewModel(application: Application) : AndroidViewModel(application) {
     private val context = application.applicationContext
     private val uid = context.getSharedPreferences(ID, Context.MODE_PRIVATE).getInt(
@@ -32,6 +33,9 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     val food: LiveData<Int>
         get() = _food
 
+    private val _health = MutableLiveData<Float>(0f)
+    val health: LiveData<Float>
+        get() = _health
     init {
         firestore.collection("users").document(uid).addSnapshotListener { value, error ->
             if (error?.message != null)   {
@@ -47,6 +51,9 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
             if (values?.get(FOOD) == null) {
                 _food.value = 0
             }
+            if (values?.get(HEALTH) == null) {
+                _health.value = 3f
+            }
             values?.get(CREDITS)?.let { cred ->
                 _credits.value =cred.toString().split(".")[0].toInt()
             }
@@ -55,6 +62,9 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
             }
             values?.get(FOOD)?.let { food ->
                 _food.value = food.toString().split(".")[0].toInt()
+            }
+            values?.get(HEALTH)?.let { health ->
+                _health.value = health.toString().toFloat()
             }
 
 
