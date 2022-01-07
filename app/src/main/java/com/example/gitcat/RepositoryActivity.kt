@@ -42,6 +42,7 @@ class RepositoryActivity : AppCompatActivity() {
                 response: Response<List<Repository>>
             ) {
                 adapter.submitList(response.body())
+                binding.recyclerView.alpha = 1f
             }
 
             override fun onFailure(call: Call<List<Repository>>, t: Throwable) {
@@ -53,7 +54,7 @@ class RepositoryActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         finish()
-        return true;
+        return true
     }
 
     private fun onAdd(repository: Repository) {
