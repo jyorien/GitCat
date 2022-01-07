@@ -34,7 +34,7 @@ class RepositoryActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
 
         val json = JSONObject()
-        json.put("username", "zS1L3NT")
+        json.put("username", getSharedPreferences(USERNAME, Context.MODE_PRIVATE).getString(USERNAME, ""))
         val body = RequestBody.create(MediaType.parse("application/json"), json.toString())
         retrofitClient.getRepos(body).enqueue(object : Callback<List<Repository>> {
             override fun onResponse(
