@@ -20,15 +20,15 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
         ID,-1).toString()
     private val firestore = FirebaseFirestore.getInstance()
 
-    private val _credits = MutableLiveData<Int>()
+    private val _credits = MutableLiveData<Int>(0)
     val credits: LiveData<Int>
             get() = _credits
 
-    private val _pats = MutableLiveData<Int>()
+    private val _pats = MutableLiveData<Int>(0)
     val pats: LiveData<Int>
         get() = _pats
 
-    private val _food = MutableLiveData<Int>()
+    private val _food = MutableLiveData<Int>(0)
     val food: LiveData<Int>
         get() = _food
 
@@ -62,6 +62,9 @@ class FirebaseViewModel(application: Application) : AndroidViewModel(application
     }
     fun decreaseField(field: String,quantity: Int) {
         firestore.collection("users").document(uid).update(field, FieldValue.increment(quantity * -1.0))
+    }
+    fun increaseField(field: String, quantity: Int) {
+        firestore.collection("users").document(uid).update(field, FieldValue.increment(quantity * 1.0))
     }
 
 }
