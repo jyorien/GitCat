@@ -1,71 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="20dp"
-    android:background="#FFE9AF"
-    android:layout_gravity="center"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:id="@+id/item_fish"
-        android:layout_width="150dp"
-        android:layout_height="155dp"
-        android:background="@drawable/item_slot_bg"
-        app:layout_constraintEnd_toStartOf="@+id/item_pat"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/fish" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="20dp"
+        android:background="#FFE9AF"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/credits"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="8dp"
-            android:text="Fish"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/item_pat"
-        android:layout_width="150dp"
-        android:layout_height="155dp"
-        android:background="@drawable/item_slot_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/item_fish"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:src="@drawable/pat_icon" />
+            android:layout_marginEnd="20dp"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
+            android:background="@drawable/item_slot_bg"
+            android:padding="20dp"
+            android:elevation="3dp"
+            android:layout_gravity="end"
+            android:text="Credits: 100"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="8dp"
-            android:text="Pat"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        <FrameLayout
+            android:id="@+id/item_fish"
+            android:layout_width="150dp"
+            android:layout_height="175dp"
+            android:background="@drawable/item_slot_bg"
+            app:layout_constraintEnd_toStartOf="@+id/item_pat"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:elevation="3dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_pat">
 
-    </FrameLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/fish" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="28dp"
+                android:text="Fish"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fish_credits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="2 Credit"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/item_pat"
+            android:layout_width="150dp"
+            android:layout_height="175dp"
+            android:background="@drawable/item_slot_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:elevation="3dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toEndOf="@+id/item_fish"
+            app:layout_constraintTop_toBottomOf="@id/credits">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/pat_icon" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="28dp"
+                android:text="Pat"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/pat_credits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="1 Credit"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
