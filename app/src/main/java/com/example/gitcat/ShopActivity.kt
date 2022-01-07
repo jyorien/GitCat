@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.gitcat.databinding.ActivityShopBinding
@@ -18,6 +19,7 @@ class ShopActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
         supportActionBar?.title = "Shop"
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#D1A226")))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.itemFish.setOnClickListener { buyFish() }
         binding.itemPat.setOnClickListener { buyPat() }
         viewModel.credits.observe(this) {
@@ -46,5 +48,10 @@ class ShopActivity : AppCompatActivity() {
         viewModel.decreaseField(quantity = patPrice, field = CREDITS)
         viewModel.increaseField(quantity = 1, field = PATS)
         Snackbar.make(binding.root, "Successfully purchased pat!", Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish()
+        return true
     }
 }
