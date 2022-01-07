@@ -1,5 +1,8 @@
 package com.example.gitcat
 
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +25,7 @@ class RepositoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#D1A226")))
         supportActionBar?.title = "Choose repositories"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_repository)
@@ -38,10 +42,11 @@ class RepositoryActivity : AppCompatActivity() {
                 response: Response<List<Repository>>
             ) {
                 adapter.submitList(response.body())
+                binding.recyclerView.alpha = 1f
             }
 
             override fun onFailure(call: Call<List<Repository>>, t: Throwable) {
-                throw t
+                Log.e("hello", t.message ?: "")
             }
 
         })
@@ -49,14 +54,23 @@ class RepositoryActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         finish()
-        return true;
+        return true
     }
 
     private fun onAdd(repository: Repository) {
         val json = JSONObject()
-        json.put("username", "zS1L3NT")
+        json.put(
+            "username",
+            getSharedPreferences(USERNAME, Context.MODE_PRIVATE).getString(
+                USERNAME, ""
+            )
+        )
         json.put("repository", repository.name)
-        json.put("access_token", "")
+        json.put(
+            "access_token", getSharedPreferences(ACCESS_TOKEN, Context.MODE_PRIVATE).getString(
+                ACCESS_TOKEN, ""
+            )
+        )
         val body = RequestBody.create(MediaType.parse("application/json"), json.toString())
 
         retrofitClient.createWebhook(body).enqueue(object : Callback<Any> {
@@ -73,14 +87,14 @@ class RepositoryActivity : AppCompatActivity() {
                 } else {
                     Snackbar.make(
                         binding.root,
-                        "Failed to add repository: ${repository.name}",
+                        "Repository already added: ${repository.name}",
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
             }
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
-                throw t
+                Log.e("hello", t.message ?: "")
             }
         })
     }

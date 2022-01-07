@@ -10,14 +10,14 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AuthService {
-    @GET("start-oauth")
-    fun getAuth(): Call<Any>
+    @POST("create-webhook")
+    fun createWebhook(@Body body: RequestBody): Call<Any>
 
     @POST("repos")
     fun getRepos(@Body body: RequestBody): Call<List<Repository>>
 
-    @POST("create-webhook")
-    fun createWebhook(@Body body: RequestBody): Call<Any>
+    @POST("user")
+    fun getUser(@Body body: RequestBody): Call<User>
 
     companion object {
         private var INSTANCE: AuthService? = null
@@ -35,3 +35,8 @@ interface AuthService {
         }
     }
 }
+
+data class User(
+    val id: Int,
+    val username: String
+)
