@@ -33,91 +33,111 @@
             android:src="@drawable/grey0" />
 
         <LinearLayout
-            android:layout_marginVertical="20dp"
-            android:layout_marginHorizontal="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:id="@+id/pat"
-                android:layout_width="100dp"
-                android:layout_height="100dp">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/item_slot_bg"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/pat_icon"/>
-                <TextView
-                    android:id="@+id/pat_counts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:layout_gravity="top|end"
-                    android:background="@drawable/item_count_layout"
-                    android:text="10"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    />
-            </FrameLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/total_credits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:textSize="26sp"
+                android:gravity="center"
+                android:background="@drawable/item_slot_bg"
+                android:padding="20dp"
+                android:elevation="5dp"
+                android:layout_gravity="end"
+                android:text="Credits: 100"/>
+            <LinearLayout
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <FrameLayout
+                    android:id="@+id/pat"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/item_slot_bg"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/pat_icon"/>
+                    <TextView
+                        android:id="@+id/pat_counts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:layout_gravity="top|end"
+                        android:background="@drawable/item_count_layout"
+                        android:text="10"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/cat_food"
-                android:layout_width="100dp"
-                android:layout_height="100dp">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/item_slot_bg"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/fish"/>
-                <TextView
-                    android:id="@+id/food_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:layout_gravity="top|end"
-                    android:background="@drawable/item_count_layout"
-                    android:text="10"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    />
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/cat_food"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/item_slot_bg"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/fish"/>
+                    <TextView
+                        android:id="@+id/food_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:layout_gravity="top|end"
+                        android:background="@drawable/item_count_layout"
+                        android:text="10"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/btn_repo"
-                android:layout_width="100dp"
-                android:layout_height="100dp">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/item_slot_bg"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/repo_icon"/>
+                <FrameLayout
+                    android:id="@+id/btn_repo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/item_slot_bg"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/repo_icon"/>
 
-            </FrameLayout>
-
-
-            <FrameLayout
-                android:id="@+id/btn_shop"
-                android:layout_width="100dp"
-                android:layout_height="100dp">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="bottom"
-                    android:background="@color/white"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_baseline_shopping_cart_24"/>
-
-            </FrameLayout>
+                </FrameLayout>
 
 
+                <FrameLayout
+                    android:id="@+id/btn_shop"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="bottom"
+                        android:background="@color/white"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_baseline_shopping_cart_24"/>
+
+                </FrameLayout>
+
+
+            </LinearLayout>
         </LinearLayout>
+
+
     </FrameLayout>
 </layout>
