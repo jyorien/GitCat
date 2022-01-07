@@ -63,7 +63,11 @@ class GameActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (binding.healthBarFill.width >= binding.healthBarNoFill.width) {
-                Snackbar.make(binding.root, "GitCat's health is full. It fills you with a sense of accomplishment!", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    binding.root,
+                    "GitCat's health is full. It fills you with a sense of accomplishment!",
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
             viewModel.health.observe(this) {
@@ -76,6 +80,8 @@ class GameActivity : AppCompatActivity() {
             cancel()
             startSatisfiedCatAnimation()
             increaseHealth()
+        }
+
         binding.btnRepo.setOnClickListener { goToRepoScreen() }
         binding.btnShop.setOnClickListener { goToShopScreen() }
 
