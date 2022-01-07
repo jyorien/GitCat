@@ -12,6 +12,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val data = intent.data
+        Log.d("hello","data $data")
         val key = data?.getQueryParameter("access_token")
         getSharedPreferences(TOKEN, Context.MODE_PRIVATE).edit().putString(TOKEN,key).apply()
         val token = getSharedPreferences(TOKEN, Context.MODE_PRIVATE).getString(TOKEN, "")
