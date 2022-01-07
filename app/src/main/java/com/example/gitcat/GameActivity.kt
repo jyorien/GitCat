@@ -17,7 +17,8 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game)
-        binding.patCounts.setOnClickListener { playHappyCat() }
+        binding.pat.setOnClickListener { playHappyPatCat() }
+        binding.catFood.setOnClickListener {  playHappyFedCat() }
         Glide.with(this)
             .load(R.drawable.heart_anim)
             .into(binding.heartPlaceholder)
@@ -31,7 +32,24 @@ class GameActivity : AppCompatActivity() {
         catAnimation.start()
     }
 
-    private fun playHappyCat() {
+    private fun startHappyMoveAnimation() {
+        binding.catSprite.setImageResource(R.drawable.happy_move)
+        val catAnimation = binding.catSprite.drawable as AnimationDrawable
+        catAnimation.start()
+    }
+
+    private fun playHappyFedCat() {
+        startHappyMoveAnimation()
+        binding.heartPlaceholder.visibility = View.VISIBLE
+        val mediaPlayer = MediaPlayer.create(this, R.raw.happy_cat)
+        mediaPlayer.start()
+        Handler(Looper.getMainLooper()).postDelayed({
+            startSittingAnimation()
+            binding.heartPlaceholder.visibility = View.GONE
+        },1000)
+    }
+
+    private fun playHappyPatCat() {
         val mediaPlayer = MediaPlayer.create(this, R.raw.happy_cat)
         mediaPlayer.start()
         binding.heartPlaceholder.visibility = View.VISIBLE
