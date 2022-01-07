@@ -8,16 +8,18 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.gitcat.databinding.ActivityGameBinding
 
 class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
+    private lateinit var viewModel: FirebaseViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
+        viewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game)
         binding.pat.setOnClickListener { playHappyPatCat() }
         binding.catFood.setOnClickListener {  playHappyFedCat() }
