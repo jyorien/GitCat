@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
     private lateinit var viewModel: FirebaseViewModel
+    var incrementValue = 0f
     var internalPatCount = 0
     var internalFoodCount = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,7 @@ class GameActivity : AppCompatActivity() {
         supportActionBar?.hide()
         viewModel = ViewModelProvider(this).get(FirebaseViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game)
+        incrementValue = binding.healthBarNoFill.layoutParams.width / 5f
         binding.pat.setOnClickListener {
             if (internalPatCount == 0) {
                 Snackbar.make(binding.root, "You have no more pats! Make more commits to buy some.", Snackbar.LENGTH_SHORT).show()
@@ -37,7 +39,12 @@ class GameActivity : AppCompatActivity() {
                 Snackbar.make(binding.root, "You have no more food! Make more commits to buy some.", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (binding.healthBarFill.width >= binding.healthBarNoFill.width) {
+                Snackbar.make(binding.root, "GitCat's health is full. It fills you with a sense of accomplishment!", Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             decrementCount(FOOD, 1)
+            increaseHealth()
             playHappyFedCat() }
         binding.btnRepo.setOnClickListener { goToRepoScreen() }
         binding.btnShop.setOnClickListener { goToShopScreen() }
@@ -70,6 +77,20 @@ class GameActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun getDp(pixels: Int): Float {
+        return pixels / resources.displayMetrics.density
+    }
+
+    private fun increaseHealth() {
+        val layoutParams = binding.healthBarFill.layoutParams
+        var width = layoutParams.width + incrementValue.toInt()
+        if (width > binding.healthBarNoFill.width) {
+            width = binding.healthBarNoFill.width
+        }
+        layoutParams.width = width
+        binding.healthBarFill.layoutParams = layoutParams
     }
 
     private fun startSittingAnimation() {
