@@ -1,5 +1,6 @@
 package com.example.gitcat
 
+import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.gitcat.databinding.ActivityGameBinding
@@ -19,6 +21,8 @@ class GameActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game)
         binding.pat.setOnClickListener { playHappyPatCat() }
         binding.catFood.setOnClickListener {  playHappyFedCat() }
+        binding.btnRepo.setOnClickListener { goToRepoScreen() }
+        binding.btnShop.setOnClickListener { goToShopScreen() }
         Glide.with(this)
             .load(R.drawable.heart_anim)
             .into(binding.heartPlaceholder)
@@ -58,6 +62,17 @@ class GameActivity : AppCompatActivity() {
         },1000)
     }
 
+    private fun goToRepoScreen() {
+        // TODO: link to repo screen
+        Toast.makeText(this, "go to repo screen", Toast.LENGTH_SHORT).show()
+
+    }
+
+    private fun goToShopScreen() {
+        Intent(this, ShopActivity::class.java).also {
+            startActivity(it)
+        }
+    }
 
 
 }
