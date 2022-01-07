@@ -1,5 +1,8 @@
 package com.example.gitcat
 
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +13,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 const val CREDITS = "credits"
 const val PATS = "pats"
 const val FOOD = "food"
-class FirebaseViewModel: ViewModel() {
+class FirebaseViewModel(application: Application) : AndroidViewModel(application) {
+    private val context = application.applicationContext
+    private val uid = context.getSharedPreferences(ID, Context.MODE_PRIVATE).getInt(
+        ID,-1).toString()
     private val firestore = FirebaseFirestore.getInstance()
 
     private val _credits = MutableLiveData<Int>()
@@ -26,14 +32,14 @@ class FirebaseViewModel: ViewModel() {
         get() = _food
 
     init {
-        firestore.collection("users").document("26828488").addSnapshotListener { value, error ->
+        firestore.collection("users").document(uid).addSnapshotListener { value, error ->
             _credits.value = value?.data?.get(CREDITS).toString().split(".")[0].toInt()
             _pats.value = value?.data?.get(PATS).toString().split(".")[0].toInt()
             _food.value = value?.data?.get(FOOD).toString().split(".")[0].toInt()
         }
     }
     fun decreaseField(field: String,quantity: Int) {
-        firestore.collection("users").document("26828488").update(field, FieldValue.increment(quantity * -1.0))
+        firestore.collection("users").document(uid).update(field, FieldValue.increment(quantity * -1.0))
     }
 
 }
