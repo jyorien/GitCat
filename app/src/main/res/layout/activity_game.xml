@@ -37,7 +37,7 @@
             android:layout_marginHorizontal="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
             <FrameLayout
                 android:id="@+id/pat"
                 android:layout_width="100dp"
@@ -86,6 +86,35 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_repo"
+                android:layout_width="100dp"
+                android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/item_slot_bg"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/repo_icon"/>
+
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/btn_shop"
+                android:layout_width="100dp"
+                android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="bottom"
+                    android:background="@color/white"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_baseline_shopping_cart_24"/>
+
             </FrameLayout>
 
 

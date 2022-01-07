@@ -3,11 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_shopping_bag_24.xml" value="0.18425925925925926" />
+        <entry key="app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.18425925925925926" />
         <entry key="app/src/main/res/drawable/item_count_layout.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_slot_bg.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_game.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_shop.xml" value="0.171875" />
       </map>
     </option>
   </component>
