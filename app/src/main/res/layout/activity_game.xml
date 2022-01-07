@@ -18,10 +18,51 @@
             android:background="@drawable/room_bg" />
 
         <ImageView
+            android:id="@+id/heart_placeholder"
+            android:layout_width="64dp"
+            android:visibility="gone"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:layout_height="64dp"/>
+
+        <ImageView
             android:id="@+id/cat_sprite"
             android:layout_width="256dp"
             android:layout_height="256dp"
             android:layout_gravity="center_horizontal|bottom"
             android:src="@drawable/grey0" />
+
+        <LinearLayout
+            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <FrameLayout
+                android:id="@+id/pat_counts"
+                android:layout_width="100dp"
+                android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/item_slot_bg"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/pat_icon"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:layout_gravity="top|end"
+                    android:background="@drawable/item_count_layout"
+                    android:text="10"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    />
+            </FrameLayout>
+
+
+        </LinearLayout>
     </FrameLayout>
 </layout>
