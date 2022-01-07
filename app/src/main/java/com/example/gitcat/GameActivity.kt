@@ -55,7 +55,8 @@ class GameActivity : AppCompatActivity() {
     }
     private fun subscribeToValues() {
         viewModel.credits.observe(this) {
-            Log.d("hello","credits $it")
+            val txt = "Credits: $it"
+            binding.totalCredits.text = txt
         }
 
         viewModel.food.observe(this) {
