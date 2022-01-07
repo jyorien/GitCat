@@ -16,6 +16,9 @@
             android:name=".ShopActivity"
             android:exported="false" />
         <activity
+            android:name=".RepositoryActivity"
+            android:exported="true" />
+        <activity
             android:name=".GameActivity"
             android:exported="false" />
         <activity
