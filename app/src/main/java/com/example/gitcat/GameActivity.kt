@@ -1,19 +1,25 @@
 package com.example.gitcat
 
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
+import android.view.animation.LinearInterpolator
+import androidx.annotation.RequiresApi
+import androidx.core.animation.doOnCancel
+import androidx.core.animation.doOnEnd
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.gitcat.databinding.ActivityGameBinding
 import com.google.android.material.snackbar.Snackbar
+
 
 class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
@@ -21,6 +27,11 @@ class GameActivity : AppCompatActivity() {
     var incrementValue = 0f
     var internalPatCount = 0
     var internalFoodCount = 0
+
+    private var direction: Direction = Direction.RIGHT
+    private var position: Int = 0
+    private var cancel: (() -> Unit) = {}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -28,15 +39,27 @@ class GameActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game)
         incrementValue = binding.healthBarNoFill.layoutParams.width / 5f
         binding.pat.setOnClickListener {
-            if (internalPatCount == 0) {
-                Snackbar.make(binding.root, "You have no more pats! Make more commits to buy some.", Snackbar.LENGTH_SHORT).show()
+            if (viewModel.pats.value == 0) {
+                Snackbar.make(
+                    binding.root,
+                    "You have no more pats! Make more commits to buy some.",
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
-            decrementCount(PATS, 1)
-            playHappyPatCat() }
+
+            cancel()
+            decrementCount(PATS)
+            startSatisfiedCatAnimation()
+        }
+
         binding.catFood.setOnClickListener {
-            if (internalFoodCount == 0) {
-                Snackbar.make(binding.root, "You have no more food! Make more commits to buy some.", Snackbar.LENGTH_SHORT).show()
+            if (viewModel.food.value == 0) {
+                Snackbar.make(
+                    binding.root,
+                    "You have no more food! Make more commits to buy some.",
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
             if (binding.healthBarFill.width >= binding.healthBarNoFill.width) {
@@ -49,9 +72,10 @@ class GameActivity : AppCompatActivity() {
                 layoutParams.width = current.toInt()
                 binding.healthBarFill.layoutParams = layoutParams
             }
-            decrementCount(FOOD, 1)
+            decrementCount(FOOD)
+            cancel()
+            startSatisfiedCatAnimation()
             increaseHealth()
-            playHappyFedCat() }
         binding.btnRepo.setOnClickListener { goToRepoScreen() }
         binding.btnShop.setOnClickListener { goToShopScreen() }
 
@@ -59,30 +83,75 @@ class GameActivity : AppCompatActivity() {
         Glide.with(this)
             .load(R.drawable.heart_anim)
             .into(binding.heartPlaceholder)
-        startSittingAnimation()
 
+        animateCatWalk()
     }
-    private fun decrementCount(field: String, quantity: Int) {
 
-        viewModel.decreaseField(field,quantity)
+    private fun decrementCount(field: String) {
+        viewModel.decreaseField(field, 1)
     }
+
     private fun subscribeToValues() {
         viewModel.credits.observe(this) {
-            val txt = "Credits: $it"
-            binding.totalCredits.text = txt
+            binding.totalCredits.text = "Credits: $it"
         }
 
         viewModel.food.observe(this) {
-            internalFoodCount = it
             binding.foodCount.text = it.toString()
         }
 
         viewModel.pats.observe(this) {
-            internalPatCount = it
             binding.patCounts.text = it.toString()
         }
+    }
 
+    private fun animateCatWalk() {
+        var cancelled = false
 
+        binding.catSprite.setImageResource(R.drawable.cat_walk)
+        binding.catSprite.rotationY = when (direction) {
+            Direction.LEFT -> 0f
+            Direction.RIGHT -> 180f
+        }
+        val catWalkAnimation = binding.catSprite.drawable as AnimationDrawable
+        catWalkAnimation.start()
+
+        val distance =
+            windowManager.currentWindowMetrics.bounds.width() - binding.catSprite.layoutParams.width
+        val animation = when (direction) {
+            Direction.LEFT -> ValueAnimator.ofInt(position, 0)
+            Direction.RIGHT -> ValueAnimator.ofInt(position, distance)
+        }
+
+        cancel = {
+            animation.cancel()
+            cancelled = true
+        }
+
+        animation.duration = 8000
+        animation.interpolator = LinearInterpolator()
+        animation.addUpdateListener { v ->
+            run {
+                val value = v.animatedValue as Int
+                position = value
+                binding.catSprite.translationX = value.toFloat()
+                binding.catSprite.requestLayout()
+            }
+        }
+        animation.start()
+        animation.doOnCancel {
+            cancel = {}
+            cancelled = true
+        }
+        animation.doOnEnd {
+            if (cancelled) return@doOnEnd
+            direction = when (direction) {
+                Direction.LEFT -> Direction.RIGHT
+                Direction.RIGHT -> Direction.LEFT
+            }
+
+            animateCatWalk()
+        }
     }
 
     private fun getDp(pixels: Int): Float {
@@ -103,36 +172,33 @@ class GameActivity : AppCompatActivity() {
 //        binding.healthBarFill.layoutParams = layoutParams
     }
 
-    private fun startSittingAnimation() {
+    private fun startSatisfiedCatAnimation() {
+        // Cat Sit
         binding.catSprite.setImageResource(R.drawable.cat_sit)
-        val catAnimation = binding.catSprite.drawable as AnimationDrawable
-        catAnimation.start()
-    }
+        val catSitAnimation = binding.catSprite.drawable as AnimationDrawable
+        catSitAnimation.start()
 
-    private fun startHappyMoveAnimation() {
-        binding.catSprite.setImageResource(R.drawable.happy_move)
-        val catAnimation = binding.catSprite.drawable as AnimationDrawable
-        catAnimation.start()
-    }
-
-    private fun playHappyFedCat() {
-        startHappyMoveAnimation()
-        binding.heartPlaceholder.visibility = View.VISIBLE
+        // Cat Meow
         val mediaPlayer = MediaPlayer.create(this, R.raw.happy_cat)
         mediaPlayer.start()
-        Handler(Looper.getMainLooper()).postDelayed({
-            startSittingAnimation()
-            binding.heartPlaceholder.visibility = View.GONE
-        },1000)
-    }
 
-    private fun playHappyPatCat() {
-        val mediaPlayer = MediaPlayer.create(this, R.raw.happy_cat)
-        mediaPlayer.start()
+        // Show Heart Icon
         binding.heartPlaceholder.visibility = View.VISIBLE
+
         Handler(Looper.getMainLooper()).postDelayed({
+            // Hide Heart Icon
             binding.heartPlaceholder.visibility = View.GONE
-        },1000)
+
+            // Cat Wag Tail
+            binding.catSprite.setImageResource(R.drawable.cat_wagtail)
+            val catWagTailAnimation = binding.catSprite.drawable as AnimationDrawable
+            catWagTailAnimation.start()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                // Cat Walk
+                animateCatWalk()
+            }, 1500)
+        }, 1000)
     }
 
     private fun goToRepoScreen() {
@@ -146,6 +212,9 @@ class GameActivity : AppCompatActivity() {
             startActivity(it)
         }
     }
+}
 
-
+enum class Direction {
+    LEFT,
+    RIGHT
 }

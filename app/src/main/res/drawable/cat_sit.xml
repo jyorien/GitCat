@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/grey0" android:duration="100"/>
-    <item android:drawable="@drawable/grey1" android:duration="100"/>
-    <item android:drawable="@drawable/grey2" android:duration="100"/>
-    <item android:drawable="@drawable/grey3" android:duration="100"/>
+    <item android:drawable="@drawable/cat_sit_1" android:duration="500"/>
+    <item android:drawable="@drawable/cat_sit_2" android:duration="300"/>
+    <item android:drawable="@drawable/cat_sit_3" android:duration="300"/>
 </animation-list>
