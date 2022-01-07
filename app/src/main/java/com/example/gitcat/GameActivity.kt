@@ -63,9 +63,9 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun goToRepoScreen() {
-        // TODO: link to repo screen
-        Toast.makeText(this, "go to repo screen", Toast.LENGTH_SHORT).show()
-
+        Intent(this, RepositoryActivity::class.java).also {
+            startActivity(it)
+        }
     }
 
     private fun goToShopScreen() {

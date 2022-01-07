@@ -3,6 +3,7 @@ package com.example.gitcat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import com.example.gitcat.databinding.ActivityRepositoryBinding
 import com.google.android.material.snackbar.Snackbar
@@ -44,6 +45,11 @@ class RepositoryActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish()
+        return true;
     }
 
     private fun onAdd(repository: Repository) {
