@@ -2,6 +2,8 @@ package com.example.gitcat
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +24,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#D1A226")))
 
         val data = intent.data
         getSharedPreferences(ACCESS_TOKEN, Context.MODE_PRIVATE).edit().putString(ACCESS_TOKEN, data?.getQueryParameter("access_token")).apply()
