@@ -65,6 +65,7 @@
                         android:layout_gravity="bottom"
                         android:background="@drawable/item_slot_bg"
                         android:scaleType="fitXY"
+                        android:padding="12dp"
                         android:src="@drawable/pat_icon"/>
                     <TextView
                         android:id="@+id/pat_counts"
@@ -74,7 +75,6 @@
                         android:gravity="center"
                         android:layout_gravity="top|end"
                         android:background="@drawable/item_count_layout"
-                        android:text="10"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         />
@@ -90,6 +90,7 @@
                         android:layout_gravity="bottom"
                         android:background="@drawable/item_slot_bg"
                         android:scaleType="fitXY"
+                        android:padding="10dp"
                         android:src="@drawable/fish"/>
                     <TextView
                         android:id="@+id/food_count"
@@ -99,7 +100,6 @@
                         android:gravity="center"
                         android:layout_gravity="top|end"
                         android:background="@drawable/item_count_layout"
-                        android:text="10"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         />
@@ -115,6 +115,7 @@
                         android:layout_gravity="bottom"
                         android:background="@drawable/item_slot_bg"
                         android:scaleType="fitXY"
+                        android:padding="12dp"
                         android:src="@drawable/repo_icon"/>
 
                 </FrameLayout>
@@ -128,7 +129,8 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="bottom"
-                        android:background="@color/white"
+                        android:background="@drawable/item_slot_bg"
+                        android:padding="12dp"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_baseline_shopping_cart_24"/>
 
