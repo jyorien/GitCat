@@ -53,6 +53,13 @@ class GameActivity : AppCompatActivity() {
             startSatisfiedCatAnimation()
         }
 
+        viewModel.health.observe(this) {
+            val current = it * incrementValue
+            val layoutParams = binding.healthBarFill.layoutParams
+            layoutParams.width = current.toInt()
+            binding.healthBarFill.layoutParams = layoutParams
+        }
+
         binding.catFood.setOnClickListener {
             if (viewModel.food.value == 0) {
                 Snackbar.make(
@@ -62,6 +69,7 @@ class GameActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
+
             if (binding.healthBarFill.width >= binding.healthBarNoFill.width) {
                 Snackbar.make(
                     binding.root,
@@ -70,12 +78,7 @@ class GameActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
-            viewModel.health.observe(this) {
-                val current = it * incrementValue
-                val layoutParams = binding.healthBarFill.layoutParams
-                layoutParams.width = current.toInt()
-                binding.healthBarFill.layoutParams = layoutParams
-            }
+
             decrementCount(FOOD)
             cancel()
             startSatisfiedCatAnimation()
@@ -163,10 +166,6 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun getDp(pixels: Int): Float {
-        return pixels / resources.displayMetrics.density
-    }
-
     private fun increaseHealth() {
         if (viewModel.health.value == 5f) {
             Snackbar.make(
@@ -175,14 +174,8 @@ class GameActivity : AppCompatActivity() {
                 Snackbar.LENGTH_SHORT
             ).show()
         }
+
         viewModel.increaseField(HEALTH, 1)
-//        val layoutParams = binding.healthBarFill.layoutParams
-//        var width = layoutParams.width + incrementValue.toInt()
-//        if (width > binding.healthBarNoFill.width) {
-//            width = binding.healthBarNoFill.width
-//        }
-//        layoutParams.width = width
-//        binding.healthBarFill.layoutParams = layoutParams
     }
 
     private fun startSatisfiedCatAnimation() {

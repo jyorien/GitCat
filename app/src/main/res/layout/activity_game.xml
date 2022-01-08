@@ -54,7 +54,7 @@
                     android:layout_height="50dp">
                     <ImageView
                         android:id="@+id/health_bar_fill"
-                        android:layout_width="127dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:src="@drawable/health_bar_fill"/>
                     <ImageView
