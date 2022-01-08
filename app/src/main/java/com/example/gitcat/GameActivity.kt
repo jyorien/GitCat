@@ -134,7 +134,10 @@ class GameActivity : AppCompatActivity() {
             cancelled = true
         }
 
-        animation.duration = 8000
+        animation.duration = ((when (direction) {
+            Direction.LEFT -> position.toFloat() / distance
+            Direction.RIGHT -> 1 - (position.toFloat() / distance)
+        }) * 8000).toLong()
         animation.interpolator = LinearInterpolator()
         animation.addUpdateListener { v ->
             run {
@@ -166,7 +169,11 @@ class GameActivity : AppCompatActivity() {
 
     private fun increaseHealth() {
         if (viewModel.health.value == 5f) {
-            Snackbar.make(binding.root, "GitCat's health is full. It fills you with a sense of accomplishment!", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(
+                binding.root,
+                "GitCat's health is full. It fills you with a sense of accomplishment!",
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
         viewModel.increaseField(HEALTH, 1)
 //        val layoutParams = binding.healthBarFill.layoutParams
