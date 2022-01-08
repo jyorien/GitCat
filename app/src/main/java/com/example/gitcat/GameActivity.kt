@@ -199,8 +199,6 @@ class GameActivity : AppCompatActivity() {
         binding.heartPlaceholder.visibility = View.VISIBLE
 
         Handler(Looper.getMainLooper()).postDelayed({
-            // Hide Heart Icon
-            binding.heartPlaceholder.visibility = View.GONE
 
             // Cat Wag Tail
             binding.catSprite.setImageResource(R.drawable.cat_wagtail)
@@ -208,6 +206,8 @@ class GameActivity : AppCompatActivity() {
             catWagTailAnimation.start()
 
             Handler(Looper.getMainLooper()).postDelayed({
+                // Hide Heart Icon
+                binding.heartPlaceholder.visibility = View.GONE
                 // Cat Walk
                 animateCatWalk()
             }, 1500)
